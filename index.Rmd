@@ -1,0 +1,137 @@
+---
+title: "R Shiny"
+subtitle: "Quick intro"
+author: "R Ladies Vienna"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    seal: true
+    self_contained: false
+    nature:
+      ratio: "16:9"
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+
+<style type="text/css">
+.remark-slide-content{
+font-size: 30px;
+}
+code.r{
+  font-size: 24px;
+}
+.title-slide {
+  background-color: #562457;
+}
+.break {
+  word-break: break-all;
+}
+</style>
+
+```{r setup, include=FALSE}
+library(knitr)
+library(kableExtra)
+opts_chunk$set(echo = TRUE,   
+                      message = FALSE,
+                      warning = FALSE,
+                      collapse = TRUE,
+                      fig.height = 4,
+                      fig.width = 8,
+                      fig.align = "center",
+                      cache = FALSE)
+options(htmltools.dir.version = FALSE)
+```
+
+
+# Graphical interface for R
+
+
+<iframe width="1000" height="515" src="https://shiny.rstudio.com/gallery/kmeans-example.html"></iframe>
+
+
+
+
+---
+# Shiny
+
+With the `shiny` package we can write such an interface where the user can interactively make changes in a web-browser, but under the hood R is running and e.g. recomputing clusters and updating plots.
+
+With `shiny` we can use different input elements (selecting from a drop-down list, checkboxes, slider, ...). The selected input is then used when running the R code.
+
+In addition it can also be used for **interactive graphics** that need to re-run R code in order to update or provide new information (for example you could click on a point in one graph and update another to provide additional information on it).
+
+---
+# Shiny
+
+A lot of examples that you can play with (and also see the code for) are available in https://shiny.rstudio.com/gallery/. 
+
+When writing your own app you will start by running the code in your own R session and launch the app locally. To share your finished app you could use for example the service from R Studio (www.shinyapps.io) to host it online.
+
+The main idea when writing a shiny app is that you are using **reactive** elements: code that depends on these elements will be re-run when their value is changing. The change is typically triggered by changing the value of an **input** element that is controlled from the graphical interface.
+
+---
+# Structure of a shiny app
+
+When building a shiny app there are two components that we have to write separately:
+
+- the **UI** is setting up the user interface: how things are laid out on the page, what type of inputs there are, and what type of outputs (for example a graph that is generated)
+- the **server** contains the R code that is running (and re-running) under the hood: you can think of this as the code that takes the input arguments from the UI and generates the output, e.g. the plot you want to show
+
+These two get passed into the `shinyApp` function that will put them together and generate the app.
+
+---
+# Writing and running a shiny app
+
+The simplest setup is to write both the `ui` and `server` input to the `shinyApp` function in a single file that should be called `app.R`. We can then launch a local version of the app by hitting the "Run App" button inside R Studio.
+
+As an alternative (especially if you are building a large application), you can have two separate files `ui.R` and `server.R` and you can write a function that is launching your app with some additional input (for example if you want to be able to pass in different data each time you launch the app).
+
+To stop a locally running app you can close the pop-up window or hit the stop button. To view the app in your web-browser you can copy and paste the link that gets generated when launching.
+
+---
+# Getting started
+
+To get started we can first ask R Studio to generate a template app:
+
+- Select "File" - "New File" - "Shiny Web App"
+- Choose a name (could be just "shiny"), keep the option to have a single file `app.R` and generate the template
+- It will place the template `app.R` in a new sub-folder with the name you entered
+- This template contains a fully functioning example of a shiny app, you can directly hit the "Run App" button to see how it looks like.
+
+Have a look at the `app.R` file to check the different components that are needed, and connect it to what you see in the app. What happens (in the code and in the plot) when you move the slider?
+
+---
+# Learning more
+
+Starting from the template and introducing small changes step-by-step is a good way of getting to know how we can structure a shiny app and how the different pieces work.
+
+There is a lot to learn to fully understand how to best use shiny applications, a comprehensive overview is now available from the book "Mastering Shiny"  by Hadley Wickham: https://mastering-shiny.org/index.html
+
+For getting started the cheatsheet will certainly come in handy, you can find it from https://shiny.rstudio.com/images/shiny-cheatsheet.pdf
+
+---
+# Things to try
+
+- Change the title
+- Change how the number of bins can be entered: use `shiny::numericInput()` instead of a slider
+- Check how the histogram gets included and copy that structure to also include a scatterplot
+- Change the data example that is used, e.g. use `palmerpenguins::penguins` data instead
+- Make a scatterplot that could map different grouping variables to color (to be selected from a drop-down menu)
+- Introduce interactivity in the graph: print information about a point selected by clicking on the scatterplot (see https://shiny.rstudio.com/articles/plot-interaction.html)
+
+---
+# Going further
+
+Have a look at the package `shinythemes` and play with the different themes. (I like the simplex theme.)
+
+Try using different page layouts or using the `tabPanel` functions to introduce tabs in your app.
+
+Look into using `plotly` to include interactive graphics with e.g. tooltip information that is shown when hovering over a point.
+
+Include interactive data tables with `DT` (see https://shiny.rstudio.com/articles/datatables.html)
+
+
+
+
