@@ -107,7 +107,9 @@ Have a look at the `app.R` file to check the different components that are neede
 
 Starting from the template and introducing small changes step-by-step is a good way of getting to know how we can structure a shiny app and how the different pieces work.
 
-There is a lot to learn to fully understand how to best use shiny applications, a comprehensive overview is now available from the book "Mastering Shiny"  by Hadley Wickham: https://mastering-shiny.org/index.html
+A comprehensive resource for learning more is now available from the book "Mastering Shiny"  by Hadley Wickham: https://mastering-shiny.org/index.html
+
+You can also follow the tutorials from https://shiny.rstudio.com/tutorial/ or explore https://shiny.rstudio.com/gallery/#user-showcase
 
 For getting started the cheatsheet will certainly come in handy, you can find it from https://shiny.rstudio.com/images/shiny-cheatsheet.pdf
 
